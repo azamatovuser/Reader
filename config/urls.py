@@ -47,6 +47,7 @@ urlpatterns = [
 
     # local apps
     path('account/', include('apps.account.urls'), name='account'),
+    path('book/', include('apps.book.urls'), name='book'),
 ]
 
 if settings.DEBUG:
