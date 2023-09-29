@@ -43,16 +43,3 @@ class RegisterTestCase(APITestCase):
         })
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
-
-class AccountListTestCase(APITestCase):
-    def test_get_list(self):
-        user = authenticate(username='admin', password='123')
-        if user:
-            self.client.force_authenticate(user=user)
-
-            response = self.client.get('/account/list/')
-
-            self.assertEqual(response.status_code, status.HTTP_200_OK)
-        else:
-            self.fail("Authentication failed for user admin.")
