@@ -25,7 +25,6 @@ class AccountRegisterView(generics.GenericAPIView):
         return Response({'success': True, 'data': user_data}, status=status.HTTP_201_CREATED)
 
 
-
 class LoginView(generics.GenericAPIView):
     # http://127.0.0.1:8000/account/login/
     serializer_class = LoginSerializer

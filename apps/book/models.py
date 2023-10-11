@@ -12,9 +12,9 @@ class Timestamp(models.Model):
 class Book(Timestamp):
     author = models.CharField(max_length=221)
     title = models.CharField(max_length=221)
-    image = models.ImageField(upload_to='book_images/')
+    image = models.ImageField(upload_to='book_images/', null=True, blank=True)
     description = models.TextField()
-    file = models.FileField(upload_to='book_files/')
+    file = models.FileField(upload_to='book_files/', null=True, blank=True)
 
     def __str__(self):
         return self.title

@@ -9,6 +9,12 @@ class BookListSerializer(serializers.ModelSerializer):
         fields = ['id', 'author', 'title', 'image']
 
 
+class BookDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = '__all__'
+
+
 class MyBookListSerializer(serializers.ModelSerializer):
     account = AccountUpdateSerializer()
     book = BookListSerializer()

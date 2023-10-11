@@ -7,7 +7,11 @@ from ..models import Account
 
 class AccountListTestCase(APITestCase):
     def setUp(self):
-        Account.objects.create_user(username='test', password='123')
+        # Creating data for Account model
+        Account.objects.create_user(
+            username='test',
+            password='123'
+        )
 
     def test_get_list(self):
         user = authenticate(username='test', password='123')
@@ -23,7 +27,11 @@ class AccountListTestCase(APITestCase):
 
 class AccountDetailTestCase(APITestCase):
     def setUp(self):
-        self.user = Account.objects.create_user(username='test', password='123')
+        # Creating data for Account model
+        self.user = Account.objects.create_user(
+            username='test',
+            password='123'
+        )
         self.client.force_authenticate(user=self.user)
         self.detail_url = f'/account/detail/update/{self.user.id}/'
 
@@ -35,7 +43,11 @@ class AccountDetailTestCase(APITestCase):
 
 class AccountPatchTestCase(APITestCase):
     def setUp(self):
-        self.user = Account.objects.create_user(username='test', password='123')
+        # Creating data for Account model
+        self.user = Account.objects.create_user(
+            username='test',
+            password='123'
+        )
         self.client.force_authenticate(user=self.user)
         self.update_url = f'/account/detail/update/{self.user.id}/'
 
@@ -52,7 +64,11 @@ class AccountPatchTestCase(APITestCase):
 
 class AccountPutTestCase(APITestCase):
     def setUp(self):
-        self.user = Account.objects.create_user(username='test', password='123')
+        # Creating data for Account model
+        self.user = Account.objects.create_user(
+            username='test',
+            password='123'
+        )
         self.client.force_authenticate(user=self.user)
         self.update_url = f'/account/detail/update/{self.user.id}/'
 

@@ -7,7 +7,10 @@ from ..models import Account
 
 class LoginTestCase(APITestCase):
     def setUp(self):
-        self.user = Account.objects.create_user(username='testuser', password='testpass')
+        self.user = Account.objects.create_user(
+            username='testuser',
+            password='testpass'
+        )
         self.login_url = '/account/login/'
 
     def test_login(self):
