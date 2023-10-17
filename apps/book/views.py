@@ -1,7 +1,7 @@
 from rest_framework import generics
 from .models import Category, Book, MyBook
 from .serializers import BookListSerializer, BookDetailSerializer, \
-    MyBookListSerializer, CategorySerializer
+    MyBookListSerializer, CategorySerializer, MyBookCreateSerializer
 from rest_framework import permissions
 from .permissions import IsOwnUserOrReadOnly
 from django.shortcuts import Http404
@@ -62,3 +62,9 @@ class MyBookRetrieveDestroyAPIView(generics.RetrieveDestroyAPIView):
             return user_book
         except MyBook.DoesNotExist:
             raise NotFound(detail="not found")
+
+
+class MyBookCreateAPIView(generics.CreateAPIView):
+    # http://127.0.0.1:8000/book/my_list/create/
+    queryset = MyBook.objects.all()
+    serializer_class = MyBookCreateSerializer

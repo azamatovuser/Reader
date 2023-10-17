@@ -26,5 +26,11 @@ class MyBookListSerializer(serializers.ModelSerializer):
     account = AccountUpdateSerializer()
     book = BookListSerializer()
     class Meta:
-        model = Book
+        model = MyBook
+        fields = ['id', 'account', 'book']
+
+
+class MyBookCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyBook
         fields = ['id', 'account', 'book']
