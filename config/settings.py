@@ -13,6 +13,8 @@ import os
 from decouple import config
 from pathlib import Path
 from datetime import timedelta
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -88,15 +90,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        # production PostgreSQL databasae
+        "default": dj_database_url.parse(config("DATABASE_URL")),
+
+        # local sqlite database
         # 'NAME': BASE_DIR / 'db.sqlite3',
-        'NAME': config('NAME'),
-        'USER': config('USER'),
-        'PASSWORD': config('PASSWORD'),
-        'HOST': config('HOST'),
-        'PORT': config('PORT'),
-    }
+
+        # local PostgreSQL database
+        # 'NAME': config('NAME'),
+        # 'USER': config('USER'),
+        # 'PASSWORD': config('PASSWORD'),
+        # 'HOST': config('HOST'),
+        # 'PORT': config('PORT'),
 }
 
 
