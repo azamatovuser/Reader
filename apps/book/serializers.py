@@ -1,12 +1,19 @@
 from rest_framework import serializers
 from apps.account.serializers import AccountUpdateSerializer
-from .models import Book, MyBook
+from .models import Category, Book, MyBook
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'title']
 
 
 class BookListSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
     class Meta:
         model = Book
-        fields = ['id', 'author', 'title', 'image']
+        fields = ['id', 'author', 'title', 'image', 'category', 'price']
 
 
 class BookDetailSerializer(serializers.ModelSerializer):
