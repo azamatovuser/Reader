@@ -20,7 +20,7 @@ class Book(Timestamp):
     author = models.CharField(max_length=221)
     title = models.CharField(max_length=221)
     image = models.ImageField(upload_to='book_images/', null=True, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField()
     file = models.FileField(upload_to='book_files/', null=True, blank=True)
     price = models.DecimalField(decimal_places=2, max_digits=4, null=True)
