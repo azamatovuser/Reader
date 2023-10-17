@@ -43,3 +43,46 @@ class MyBookListTestCase(APITestCase):
 
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(serializer_data, response.data)
+
+
+class MyBookRetrieveDestroyTestCase(APITestCase):
+
+    def setUp(self):
+        self.user = Account.objects.create_user(username='testuser', password='testpass')
+        self.other_user = Account.objects.create_user(username='otheruser', password='otherpass')
+
+        self.book = Book.objects.create(
+            author='book_author',
+            title='book_title',
+            description='book_description',
+            price='99.99'
+        )
+        self.mybook = MyBook.objects.create(account=self.user, book=self.book)
+
+    def test_retrieve_mybook_authenticated(self):
+        self.client.force_authenticate(self.user)
+        response = self.client.get(f'/book/my_list/detail/{self.mybook.id}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['id'], self.mybook.id)
+
+    def test_retrieve_mybook_unauthorized(self):
+        self.client.force_authenticate(self.other_user)
+        response = self.client.get(f'/book/my_list/detail/{self.mybook.id}/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_delete_mybook_authenticated(self):
+        self.client.force_authenticate(self.user)
+        response = self.client.delete(f'/book/my_list/detail/{self.mybook.id}/')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_delete_mybook_unauthorized(self):
+        self.client.force_authenticate(self.other_user)
+        response = self.client.delete(f'/book/my_list/detail/{self.mybook.id}/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_retrieve_delete_without_authentication(self):
+        response = self.client.get(f'/book/my_list/detail/{self.mybook.id}/')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+        response = self.client.delete(f'/book/my_list/detail/{self.mybook.id}/')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

@@ -52,7 +52,7 @@ class MyBookRetrieveDestroyAPIView(generics.RetrieveDestroyAPIView):
     # http://127.0.0.1:8000/book/my_list/detail/book_id/
     queryset = MyBook.objects.all()
     serializer_class = MyBookListSerializer
-    permissions = [permissions.IsAuthenticated, IsOwnUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, IsOwnUserOrReadOnly]
 
     def get_object(self):
         mybook_id = self.kwargs.get('pk')
