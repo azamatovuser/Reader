@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://reader-app-ms1b.onrender.com', 'reader-app-ms1b.onrender.com']
+ALLOWED_HOSTS = ['https://reader-dslb.onrender.com', 'reader-dslb.onrender.com']
 
 
 # Application definition
